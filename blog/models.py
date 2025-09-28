@@ -13,3 +13,6 @@ class Post(models.Model):
     published_time = models.DateTimeField(null=True)
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "{}-{}".format(self.title,self.id)
