@@ -18,4 +18,4 @@ class Post(models.Model):
         ordering = ['created_time']
 
     def __str__(self):
-        return "{}-{}".format(self.title,self.id)
+        return "{}-{}".format(self.id,self.title)
