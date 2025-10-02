@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from blog.models import Post
+from django.utils import timezone
 # Create your views here.
 def blog_home(request):
-    posts = Post.objects.filter(status=1)
+    now = timezone.now().date()
+    posts = Post.objects.filter(published_time__lte=now)
+    #posts = Post.objects.all()
     context = {'posts':posts}
     return render(request,'Blog/blog-home.html',context)
 
