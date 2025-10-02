@@ -6,8 +6,8 @@ class Contact(models.Model):
     subject = models.CharField(max_length=255)
     email = models.EmailField()
     message = models.TextField()
-    created_time = models.DateTimeField(auto_now_add=True)
-    updated_time = models.DateTimeField(auto_now=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
     
     class Meta:
         ordering = ['created_time']
