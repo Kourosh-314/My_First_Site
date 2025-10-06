@@ -9,7 +9,7 @@
     {{posts}}
 
     {% for post in posts %}
-    {% if post.status == 0 %}
+    {% if post.status == 1 %}
     <h1>{{post.title}}</h1>
     <p>{{post.content}}</p>
     <small>{{post.published_time}}</small>
