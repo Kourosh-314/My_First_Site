@@ -3,7 +3,7 @@ from blog.models import Post
 from django.utils import timezone
 
 # Create your views here.
-#def for incresing the number of views
+#def for increasing the number of views
 def increase_views(posts):
     for post in posts:
         post.counted_views +=1
