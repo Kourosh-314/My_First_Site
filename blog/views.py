@@ -1,12 +1,12 @@
-from django.shortcuts import render,get_list_or_404
+from django.shortcuts import render,get_object_or_404
 from blog.models import Post
 from django.utils import timezone
 
 # Create your views here.
-#def for increasing the number of views  
-def increase_views(posts):      
-    posts.counted_views +=1
-    posts.save(update_fields=['counted_views'])
+#def for increasing the number of views.  
+def increase_views(post):      
+    post.counted_views +=1
+    post.save(update_fields=['counted_views'])
 
 def blog_home(request):
     now = timezone.now()
@@ -15,12 +15,12 @@ def blog_home(request):
     return render(request,'Blog/blog-home.html',context)
 
 def blog_single(request,pid):
-    posts = Post.objects.get(pk=pid)
-    increase_views(posts)
-    context = {'posts':posts}
+    post = get_object_or_404(Post,pk = pid,status = 1)
+    increase_views(post)
+    context = {'post':post}
     return render(request,'Blog/blog-single.html',context)
 
 def test(request,pid):
-    posts = get_list_or_404(Post,pk=pid)
+    posts = get_object_or_404(Post,pk=pid)
     context = {'posts':posts}
     return render(request,'test.html',context)
