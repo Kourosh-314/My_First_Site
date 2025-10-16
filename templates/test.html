@@ -1,12 +1,14 @@
+{% load blog_tags %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    {{posts}}
 
     {% for post in posts %}
     {% if post.status == 1 %}
@@ -17,5 +19,9 @@
     <p>{{post.title}} is Published</p>
     {% endif %}
     {% endfor %}
+    <p>The Number Of Published Posts are :{%totalposts%}</p>
+
+
 </body>
+
 </html>

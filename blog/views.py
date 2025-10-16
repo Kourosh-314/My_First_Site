@@ -20,7 +20,7 @@ def blog_single(request,pid):
     context = {'post':post}
     return render(request,'Blog/blog-single.html',context)
 
-def test(request,pid):
-    posts = get_object_or_404(Post,pk=pid)
+def test(request):
+    posts = Post.objects.all()
     context = {'posts':posts}
     return render(request,'test.html',context)
