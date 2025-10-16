@@ -9,18 +9,12 @@
 </head>
 
 <body>
-
+    
+     <p>The Number Of Published Posts are :{%totalposts%}</p>
     {% for post in posts %}
-    {% if post.status == 1 %}
-    <h1>{{post.title}}</h1>
-    <p>{{post.content}}</p>
-    <small>{{post.published_time}}</small>
-    {% else %}
-    <p>{{post.title}} is Published</p>
-    {% endif %}
+    <p>{{post.content|snippet}}</p>
     {% endfor %}
-    <p>The Number Of Published Posts are :{%totalposts%}</p>
-
+    
 
 </body>
 
