@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import truncatewords
 
 # Create your models here.
 class Category(models.Model):
@@ -26,3 +27,7 @@ class Post(models.Model):
 
     def __str__(self):
         return "{}-{}".format(self.id,self.title)
+    # There is also a template tag for following function which i wrote in blog-home.html 
+    def truncatewords(self):
+        context = truncatewords(self.content, 5)
+        return context
