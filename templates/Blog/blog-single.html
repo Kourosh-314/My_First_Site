@@ -66,6 +66,7 @@
 					
 				</div>
 				<div class="navigation-area">
+						{% if previous_post %}
 					<div class="row">
 						<div
 							class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
@@ -77,17 +78,19 @@
 							</div>
 							<div class="detials">
 								<p>Prev Post</p>
-								<a href="#">
-									<h4>Space The Final Frontier</h4>
+								<a href="{% url 'blog:single' pid=previous_post.id %}">
+									<h4>{{previous_post.title}}</h4>
 								</a>
 							</div>
 						</div>
+						{% endif %}
+						{% if next_post %}
 						<div
 							class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
 							<div class="detials">
 								<p>Next Post</p>
-								<a href="#">
-									<h4>Telescopes 101</h4>
+								<a href="{% url 'blog:single' pid=next_post.id %}">
+									<h4>{{next_post.title}}</h4>
 								</a>
 							</div>
 							<div class="arrow">
@@ -97,6 +100,7 @@
 								<a href="#"><img class="img-fluid" src="{% static 'imgblog/next.jpg' %}" alt=""></a>
 							</div>
 						</div>
+						{% endif %}
 					</div>
 				</div>
 				<div class="comments-area">
