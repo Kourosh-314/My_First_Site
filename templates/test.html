@@ -9,11 +9,12 @@
 </head>
 
 <body>
+    <H1>This Is Test Page</H1>
+    <p>The Number Of Published Posts are :{% totalposts %}</p>
     
-     <p>The Number Of Published Posts are :{%totalposts%}</p>
-    {% for post in posts %}
-    <p>{{post.content|snippet}}</p>
-    {% endfor %}
+    <p>tets:</p>
+    {% popularposts %}
+    
     
 
 </body>
