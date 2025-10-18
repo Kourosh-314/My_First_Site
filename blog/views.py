@@ -39,6 +39,12 @@ def blog_single(request,pid):
     context = {'current_post':current_post,'posts':posts,'next_post':next_post,'previous_post':previous_post}
     return render(request,'Blog/blog-single.html',context)
 
+def blog_category(request,cat_name):
+    posts = Post.objects.filter(published_time__lte = now , status = 1)
+    posts = posts.filter(category__name = cat_name)
+    context = {"posts":posts}
+    return render(request,'Blog/blog-home.html',context)
+
 def test(request):
     posts = Post.objects.all()
     context = {'posts':posts}
