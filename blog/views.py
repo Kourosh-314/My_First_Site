@@ -1,9 +1,12 @@
-from django.shortcuts import render,get_object_or_404,get_list_or_404
+from django.shortcuts import render,get_list_or_404
 from blog.models import Post
 from django.utils import timezone
 from django.http import Http404
+
 now = timezone.now()
+
 # Create your views here.
+
 #def for increasing the number of views.  
 def increase_views(post):      
     post.counted_views +=1
