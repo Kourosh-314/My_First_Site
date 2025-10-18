@@ -1,6 +1,9 @@
 from django import template
 from blog.models import Post
 from blog.models import Category
+from django.utils import timezone
+
+now = timezone.now()
 register = template.Library()
 
 @register.simple_tag(name = 'totalposts')
@@ -19,7 +22,7 @@ def latestposts(arg=3):
 
 @register.inclusion_tag('Blog/blog-single-post-categories.html')
 def postcategories():
-    posts = Post.objects.filter(status=1)
+    posts = Post.objects.filter(status=1,published_time__lte = now)
     categories = Category.objects.all()
     cat_dict = {}
     for name in categories:
