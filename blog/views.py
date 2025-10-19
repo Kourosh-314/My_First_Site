@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_list_or_404
+from django.shortcuts import render , get_list_or_404
 from blog.models import Post
 from django.utils import timezone
 from django.http import Http404
@@ -12,8 +12,10 @@ def increase_views(post):
     post.counted_views +=1
     post.save(update_fields=['counted_views'])
 
-def blog_home(request):
+def blog_home(request,cat_name = None):
     posts = Post.objects.filter(published_time__lte = now , status = 1)
+    if cat_name:
+        posts = posts.filter(category__name = cat_name)
     context = {'posts':posts}
     return render(request,'Blog/blog-home.html',context)
 
