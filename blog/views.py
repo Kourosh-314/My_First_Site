@@ -12,10 +12,12 @@ def increase_views(post):
     post.counted_views +=1
     post.save(update_fields=['counted_views'])
 
-def blog_home(request,cat_name = None):
+def blog_home(request,**kwargs):
     posts = Post.objects.filter(published_time__lte = now , status = 1)
-    if cat_name:
-        posts = posts.filter(category__name = cat_name)
+    if kwargs.get('cat_name') != None:
+        posts = posts.filter(category__name = kwargs['cat_name'])
+    if kwargs.get('author_username') != None:
+        posts = posts.filter(author__username = kwargs['author_username'])
     context = {'posts':posts}
     return render(request,'Blog/blog-home.html',context)
 
