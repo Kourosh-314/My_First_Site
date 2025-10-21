@@ -2941,8 +2941,8 @@ body.mobile-nav-active #mobile-nav-toggle {
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
-  max-width: 100px;
-  max-height: 100px;
+  max-width: 300px;
+  max-height: 300px;
 }
 
 .recent-blog-area .single-recent-blog-post .tags {
