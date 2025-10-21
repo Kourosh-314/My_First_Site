@@ -117,7 +117,7 @@
 						<p class="excert">
 							{{post.content|truncatewords:5}}
 						</p>
-						<a href="blog-single.html" class="primary-btn">View More</a>
+						<a href="{% url 'blog:single' pid=post.id %}" class="primary-btn">View More</a>
 					</div>
 				</div>
 				{% endfor %}
