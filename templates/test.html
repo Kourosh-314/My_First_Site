@@ -5,15 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Form Test</title>
 </head>
 
 <body>
-    <H1>This Is Test Page</H1>
-    <p>The Number Of Published Posts are :{% totalposts %}</p>
+    <form action="{% url 'myapp:test' %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Submit</button>
+    </form>
     
-    <p>tets:</p>
-    {% latestposts %}
     
     
 
