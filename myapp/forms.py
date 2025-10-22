@@ -8,6 +8,8 @@ from myapp.models import NewsLetter
     message = forms.CharField(widget=forms.Textarea)'''
 
 class ContactForm(forms.ModelForm):
+    # subject field is not needed to be fiiled
+    subject = forms.CharField(max_length=255,required=False)
     class Meta:
         model = Contact
         fields = '__all__'

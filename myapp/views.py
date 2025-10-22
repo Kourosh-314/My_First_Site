@@ -11,9 +11,9 @@ def contact(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.add_message(request,messages.SUCCESS,"Your tecket submited successfully")
+            messages.add_message(request,messages.SUCCESS,"Your ticket submited successfully")
         else:
-            messages.add_message(request,messages.ERROR,"Your tecket submited unsuccessfully")
+            messages.add_message(request,messages.ERROR,"Your ticket submited unsuccessfully")
     form = ContactForm()
     return render(request,"website/contact.html",{'form':form})
 
@@ -28,8 +28,10 @@ def newsletter_view(request):
         form = NewsLetterForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.add_message(request,messages.SUCCESS,"Your email submited successfully")
             return HttpResponseRedirect("/")
         else:
+            messages.add_message(request,messages.ERROR,"Your email submited unsuccessfully")
             return HttpResponseRedirect("/")
     form = NewsLetterForm()
     return render(request,"base.html",{"form":form})
