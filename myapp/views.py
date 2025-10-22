@@ -10,7 +10,10 @@ def contact(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
+            #for adding my own value for name
+            contact = form.save(commit=False)
+            contact.name = "Unknown"
+            contact.save()
             messages.add_message(request,messages.SUCCESS,"Your ticket submited successfully")
         else:
             messages.add_message(request,messages.ERROR,"Your ticket submited unsuccessfully")
