@@ -1,6 +1,7 @@
 from django import forms
 from myapp.models import Contact
 from myapp.models import NewsLetter
+
 '''class NameForm(forms.Form):
     name = forms.CharField(max_length=255)
     email = forms.EmailField()
