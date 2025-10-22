@@ -12,7 +12,7 @@
 				</h1>
 				<p class="text-white link-nav"><a href="{% url 'myapp:index' %}">Home </a> <span
 						class="lnr lnr-arrow-right"></span>
-					<a href="{% url 'myapp:contact'%}"> Contact Us</a>
+					<a href="{% url 'myapp:contact' %}"> Contact Us</a>
 				</p>
 			</div>
 		</div>
@@ -87,11 +87,27 @@
 				</form>
 			</div>
 			{% if messages %}
-			<ul class="messages">
-				{% for message in messages %}
-				<li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+			{% for message in messages %}
+			<div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+			{% endfor %}
+			{% endif %}
+
+			{% if form.errors %}
+			<div class="alert alert-error">
+				<h4>Please fix the following errors</h4>
+				<ul>
+					{% for field in form %}
+					{% if field.errors %}
+					{% for error in field.errors %}
+					<li><a href="#id_{{ field.name }}" class="error">{{ error|escape }}</a></li>
 					{% endfor %}
-			</ul>
+					{% endif %}
+					{% endfor %}
+				</ul>
+				{% if form.non_field_errors %}
+				{{ form.non_field_errors }}
+				{% endif %}
+			</div>
 			{% endif %}
 		</div>
 	</div>
