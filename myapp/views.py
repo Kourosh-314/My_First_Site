@@ -10,7 +10,7 @@ def contact(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
-            #for adding my own value for name
+            #for adding my own value for name and subject
             contact = form.save(commit=False)
             contact.name = "Unknown"
             if contact.subject =="":
