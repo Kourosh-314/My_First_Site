@@ -13,6 +13,8 @@ def contact(request):
             #for adding my own value for name
             contact = form.save(commit=False)
             contact.name = "Unknown"
+            if contact.subject =="":
+                contact.subject=None
             contact.save()
             messages.add_message(request,messages.SUCCESS,"Your ticket submited successfully")
         else:
