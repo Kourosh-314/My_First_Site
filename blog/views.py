@@ -1,4 +1,4 @@
-from django.shortcuts import render , get_list_or_404
+from django.shortcuts import render , get_list_or_404 , get_object_or_404
 from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 from blog.models import Post
 from django.utils import timezone
@@ -19,6 +19,8 @@ def blog_home(request,**kwargs):
         posts = posts.filter(category__name = kwargs['cat_name'])
     if kwargs.get('author_username') != None:
         posts = posts.filter(author__username = kwargs['author_username'])
+    if kwargs.get('tag_name') != None:
+        posts = posts.filter(tag__name__in = [kwargs['tag_name']])
     posts = Paginator(posts,3)
     try:
         page_number = request.GET.get("page")
@@ -32,12 +34,12 @@ def blog_home(request,**kwargs):
 
 def blog_single(request,pid):
     posts = get_list_or_404(Post,published_time__lte=now, status=1)
-    current_post = None
+    post = None
     next_post = None
     previous_post = None
     try:
-        current_post = next(post for post in posts if post.id == pid)
-        current_index = posts.index(current_post)
+        post = next(post for post in posts if post.id == pid)
+        current_index = posts.index(post)
         
         if current_index < len(posts) - 1:
             next_post = posts[current_index + 1]
@@ -47,9 +49,8 @@ def blog_single(request,pid):
 
     except StopIteration:
         raise Http404()
-    
-    increase_views(current_post)
-    context = {'current_post':current_post,'posts':posts,'next_post':next_post,'previous_post':previous_post}
+    increase_views(post)
+    context = {'post':post,'next_post':next_post,'previous_post':previous_post}
     return render(request,'Blog/blog-single.html',context)
 
 def blog_search(request):
