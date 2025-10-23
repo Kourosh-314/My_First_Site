@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import truncatewords
-
+from django.urls import reverse
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length = 255)
@@ -31,3 +31,6 @@ class Post(models.Model):
     def truncatewords(self):
         context = truncatewords(self.content, 5)
         return context
+    
+    def get_absolute_url(self):
+        return reverse('blog:single',kwargs={'pid':self.id})
