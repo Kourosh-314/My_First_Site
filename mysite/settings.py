@@ -46,12 +46,14 @@ INSTALLED_APPS = [
     'robots',
     'debug_toolbar',
     'taggit',
+    'django_summernote',
 ]
 #sites framework
 SITE_ID = 2
 
 #robots framework
 ROBOTS_USE_HOST = False
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -143,6 +145,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#debuge_toolbar
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
