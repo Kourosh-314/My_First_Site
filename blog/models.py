@@ -42,6 +42,13 @@ class Comment(models.Model):
     email = models.EmailField()
     subject = models.CharField(max_length=255)
     message = models.TextField()
+    image = models.ImageField(upload_to = 'comment/',default = 'comment/default.jpg')
     approved = models.BooleanField(default=False)
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['created_time'] 
+
+    def __str__(self):
+        return self.name

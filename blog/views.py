@@ -1,8 +1,10 @@
-from django.shortcuts import render , get_list_or_404 , get_object_or_404
+from django.shortcuts import render , get_list_or_404 , get_object_or_404 ,HttpResponseRedirect
 from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
-from blog.models import Post
+from blog.models import Post ,Comment
 from django.utils import timezone
 from django.http import Http404
+from blog.forms import CommentForm
+from django.contrib import messages
 
 now = timezone.now()
 
@@ -33,6 +35,13 @@ def blog_home(request,**kwargs):
     return render(request,'Blog/blog-home.html',context)
 
 def blog_single(request,pid):
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request,messages.SUCCESS,"Your comment submited successfully")
+        else:
+            messages.add_message(request,messages.ERROR,"Your comment submited unsuccessfully")
     posts = get_list_or_404(Post,published_time__lte=now, status=1)
     post = None
     next_post = None
@@ -49,8 +58,10 @@ def blog_single(request,pid):
 
     except StopIteration:
         raise Http404()
+    comments = Comment.objects.filter(post = post.id , approved = True)
+    form = CommentForm()
     increase_views(post)
-    context = {'post':post,'next_post':next_post,'previous_post':previous_post}
+    context = {'post':post,'next_post':next_post,'previous_post':previous_post,'comments':comments,"form":form}
     return render(request,'Blog/blog-single.html',context)
 
 def blog_search(request):

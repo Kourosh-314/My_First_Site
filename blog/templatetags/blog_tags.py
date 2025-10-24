@@ -1,5 +1,5 @@
 from django import template
-from blog.models import Post
+from blog.models import Post ,Comment
 from blog.models import Category
 from django.utils import timezone
 
@@ -14,6 +14,11 @@ def function():
 @register.filter
 def snippet(value,arg = 10):
     return value[:arg]
+
+@register.simple_tag(name="comments_count")
+def function(pid):
+    post = Post.objects.get(pk=pid)
+    return Comment.objects.filter(post = pid,approved=True).count()
 
 @register.inclusion_tag('Blog/blog-popular-posts.html')
 def latestposts(arg=3):
