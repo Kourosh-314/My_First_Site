@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'robots',
     'debug_toolbar',
     'taggit',
-    'captcha'
+    'captcha',
+    'accounts.apps.AccountsConfig',
 ]
 #sites framework
 SITE_ID = 2
