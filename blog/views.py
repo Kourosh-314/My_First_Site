@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.http import Http404
 from blog.forms import CommentForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 now = timezone.now()
 
@@ -15,6 +16,7 @@ def increase_views(post):
     post.counted_views +=1
     post.save(update_fields=['counted_views'])
 
+@login_required
 def blog_home(request,**kwargs):
     posts = Post.objects.filter(published_time__lte = now , status = 1)
     if kwargs.get('cat_name') != None:
@@ -34,6 +36,7 @@ def blog_home(request,**kwargs):
     context = {'posts':posts}
     return render(request,'Blog/blog-home.html',context)
 
+@login_required
 def blog_single(request,pid):
     if request.method == "POST":
         form = CommentForm(request.POST)

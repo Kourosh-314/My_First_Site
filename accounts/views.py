@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login , logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def login_view(request):
     #Adding a another form of getting user authenticated besides in login html page
@@ -9,13 +10,13 @@ def login_view(request):
         if request.method =='POST':
             form = AuthenticationForm(request = request,data = request.POST)
             if form.is_valid(): 
-                username = form.cleaned_data.get['Username']
-                password = form.cleaned_data.get['Password']
+                username = form.cleaned_data.get('username')
+                password = form.cleaned_data.get('password')
                 user = authenticate(request, username=username, password=password)
                 #Cheking if the user is not in the database
                 if user is not None:
                     login(request,user)
-                    messages.add_message(request,messages.SUCCESS,"You logged in seccessfully")
+                    messages.add_message(request,messages.SUCCESS,"You logged in successfully")
                     return redirect('/')
         form = AuthenticationForm()
         context = {"form":form}
@@ -24,8 +25,11 @@ def login_view(request):
         messages.add_message(request,messages.SUCCESS,"You have already logged in successfuly")
         return redirect('/')
     
-
+@login_required
 def logout_view(request):
-    return render(request,'accounts/logout.html')
+    logout(request)
+    messages.add_message(request,messages.SUCCESS,"You logged out seccessfully")
+    return redirect('/')
+
 def signup_view(request):
     return render(request,'accounts/signup.html')
