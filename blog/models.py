@@ -19,6 +19,7 @@ class Post(models.Model):
     tag = TaggableManager()
     counted_views = models.IntegerField(default=0)
     status = models.BooleanField(default=False)
+    login_require = models.BooleanField(default=False)
     published_time = models.DateTimeField(null=True)
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)

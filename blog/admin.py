@@ -5,7 +5,7 @@ from blog.models import Post , Category , Comment
 class PostAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_time'
     empty_value_display = 'empty'
-    list_display = ('title','author','counted_views','status','published_time','created_time')
+    list_display = ('title','author','counted_views','login_require','status','published_time','created_time')
     list_filter = ('status','author')
     search_fields = ['title','content']
     summernote_fields = ('content',)
