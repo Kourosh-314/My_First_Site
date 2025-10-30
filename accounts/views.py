@@ -112,7 +112,7 @@ def login_view(request):
                     messages.add_message(request,messages.SUCCESS,"You logged in successfully")
                     return redirect('/')
             else:
-                messages.error(request, "Invalid email/username or password")
+                messages.add_message(request,messages.ERROR ,"Invalid email/username or password")
         else:
             form = EmailOrUsernameAuthForm()
 
@@ -137,7 +137,7 @@ def signup_view(request):
                 messages.add_message(request,messages.SUCCESS,"You signed up successfully")
                 return redirect('accounts:login')
             else:
-                messages.error(request, "Please correct the errors below")
+                messages.add_message(request,messages.ERROR ,"Please correct the errors below")
         else:
             form = CustomUserCreationForm()
 
